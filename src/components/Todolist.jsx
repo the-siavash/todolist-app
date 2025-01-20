@@ -3,9 +3,10 @@ import TodoItem from './TodoItem';
 import TodoAddItem from './TodoAddItem';
 import SortTodos from './SortTodos';
 import FilterTodos from './FilterTodos';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 function Todolist() {
-  const [todolist, setTodolist] = useState([]);
+  const [todolist, setTodolist] = useLocalStorage('todolist', []);
   const [sortedBy, setSortedBy] = useState('newest');
   const [filter, setFilter] = useState('all');
   const dialogRef = useRef();
