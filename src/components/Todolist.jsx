@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import TodoItem from './TodoItem';
+import TodoAddItem from './TodoAddItem';
 
 function Todolist() {
   const [todolist, setTodolist] = useState([]);
+  const dialogRef = useRef();
 
   const today = {
     weekday: new Date().toLocaleDateString('en-US', { weekday: 'long' }),
@@ -12,6 +14,10 @@ function Todolist() {
   };
   const formattedToday = `${today.weekday}, ${today.month} ${today.day}, ${today.year}`;
 
+  const handleTodolist = (todo) => {
+    setTodolist([...todolist, todo]);
+  };
+
   return (
     <div className="todolist">
       <div className="todolist__header">
@@ -19,9 +25,14 @@ function Todolist() {
           <h1 className="todolist__title">Todo List</h1>
           <p className="todolist__date">{formattedToday}</p>
         </div>
-        <button className="btn btn--primary" type="button">
+        <button
+          className="btn btn--primary"
+          type="button"
+          onClick={() => dialogRef.current?.showModal()}
+        >
           New Todo
         </button>
+        <TodoAddItem dialogRef={dialogRef} onTodoSubmit={handleTodolist} />
       </div>
 
       <div className="todolist__body">

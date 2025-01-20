@@ -85,3 +85,13 @@ ul {
   max-width: 680px;
   margin: 0 auto;
 }
+
+.flex {
+  display: flex;
+}
+.items-center {
+  align-items: center;
+}
+.gap-1 {
+  gap: 0.75rem;
+}
