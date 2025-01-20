@@ -32,6 +32,14 @@ function Todolist() {
     );
   };
 
+  const handleTodoEdit = (editedTodo) => {
+    setTodolist((prevTodolist) =>
+      prevTodolist.map((todo) =>
+        todo.id === editedTodo.id ? { ...todo, ...editedTodo } : todo
+      )
+    );
+  };
+
   return (
     <div className="todolist">
       <div className="todolist__header">
@@ -59,6 +67,7 @@ function Todolist() {
             todoData={todo}
             onCheckToggle={handleTodoCheckToggle}
             onRemove={handleTodoRemove}
+            onEdit={handleTodoEdit}
           />
         ))}
       </div>
