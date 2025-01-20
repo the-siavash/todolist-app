@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 
-function TodoItem({ todoData, onCheckToggle }) {
+function TodoItem({ todoData, onCheckToggle, onRemove }) {
   const formattedDate = new Date(todoData.editedAt).toLocaleDateString(
     'en-US',
     {
@@ -27,7 +27,12 @@ function TodoItem({ todoData, onCheckToggle }) {
         <p className="flex items-center gap-1">
           <span className="todolist__item-date">{formattedDate}</span>
           <span className="todolist__icon-edit">edit</span>
-          <span className="todolist__icon-remove">remove</span>
+          <span
+            className="todolist__icon-remove"
+            onClick={() => onRemove(todoData.id)}
+          >
+            remove
+          </span>
         </p>
       </div>
     </div>

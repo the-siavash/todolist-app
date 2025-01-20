@@ -26,6 +26,12 @@ function Todolist() {
     );
   };
 
+  const handleTodoRemove = (todoId) => {
+    setTodolist((prevTodolist) =>
+      prevTodolist.filter((todo) => todo.id !== todoId)
+    );
+  };
+
   return (
     <div className="todolist">
       <div className="todolist__header">
@@ -52,6 +58,7 @@ function Todolist() {
             key={todo.id}
             todoData={todo}
             onCheckToggle={handleTodoCheckToggle}
+            onRemove={handleTodoRemove}
           />
         ))}
       </div>
