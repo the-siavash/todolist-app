@@ -22,7 +22,6 @@ Another simple responsive todolist app built with React written in JS, that help
 
 - HTML/CSS
   - Responsive Design
-  - Mobile-First Workflow
   - Used BEM Methodology
 - React 19 (written in JS)
 - Dependencies
