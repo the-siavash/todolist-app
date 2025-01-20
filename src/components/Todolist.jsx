@@ -18,6 +18,14 @@ function Todolist() {
     setTodolist([...todolist, todo]);
   };
 
+  const handleTodoCheckToggle = (todoId) => {
+    setTodolist((prevTodolist) =>
+      prevTodolist.map((todo) =>
+        todo.id === todoId ? { ...todo, isChecked: !todo.isChecked } : todo
+      )
+    );
+  };
+
   return (
     <div className="todolist">
       <div className="todolist__header">
@@ -40,7 +48,11 @@ function Todolist() {
           <p className="todolist__item--empty">There is nothing todo...</p>
         )}
         {todolist.map((todo) => (
-          <TodoItem key={todo.id} todoData={todo} />
+          <TodoItem
+            key={todo.id}
+            todoData={todo}
+            onCheckToggle={handleTodoCheckToggle}
+          />
         ))}
       </div>
     </div>

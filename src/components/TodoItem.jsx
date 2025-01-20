@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 
-function TodoItem({ todoData }) {
+function TodoItem({ todoData, onCheckToggle }) {
   const formattedDate = new Date(todoData.editedAt).toLocaleDateString(
     'en-US',
     {
@@ -19,6 +19,7 @@ function TodoItem({ todoData }) {
         icon={todoData.isChecked ? faCircleCheck : faCircle}
         size="lg"
         className="todolist__icon-check"
+        onClick={() => onCheckToggle(todoData.id)}
       />
       <div className="todolist__item-content">
         <h2 className="todolist__item-title">{todoData.title}</h2>
