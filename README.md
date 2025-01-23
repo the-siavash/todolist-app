@@ -23,7 +23,7 @@ Another simple responsive todolist app built with React written in JS, that help
 - HTML/CSS
   - Responsive Design
   - Used BEM Methodology
-- React 19 (written in JS)
+- React 18 (written in JS)
 - Dependencies
   - FontAwesome
   - React Hot Toast
