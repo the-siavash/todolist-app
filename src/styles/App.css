@@ -80,7 +80,7 @@
   padding: 0 2rem;
   max-height: calc(100vh - 215px);
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: visible;
   scrollbar-width: thin;
   scrollbar-color: var(--color-primary) var(--color-gray-100);
 }
