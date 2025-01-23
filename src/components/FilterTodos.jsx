@@ -16,8 +16,10 @@ function FilterTodos({ filterBy, onFilter, todolist }) {
         <FilterItem
           key={filterItem.text}
           item={filterItem}
-          classNames={`filter__item ${filterItem === filterBy && 'selected'}`}
-          handleClick={onFilter}
+          classNames={`filter__item ${
+            filterItem.text === filterBy && 'selected'
+          }`}
+          onFilter={onFilter}
         />
       ))}
     </ul>
@@ -25,9 +27,9 @@ function FilterTodos({ filterBy, onFilter, todolist }) {
 }
 export default FilterTodos;
 
-function FilterItem({ item, classNames, handleClick }) {
+function FilterItem({ item, classNames, onFilter }) {
   return (
-    <li className={classNames} onClick={() => handleClick(item.text)}>
+    <li className={classNames} onClick={() => onFilter(item.text)}>
       {item.text} ({item.length})
     </li>
   );
