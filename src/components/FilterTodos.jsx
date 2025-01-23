@@ -30,7 +30,7 @@ export default FilterTodos;
 function FilterItem({ item, classNames, onFilter }) {
   return (
     <li className={classNames} onClick={() => onFilter(item.text)}>
-      {item.text} ({item.length})
+      {item.text} <span>({item.length})</span>
     </li>
   );
 }
