@@ -1,13 +1,12 @@
 function FilterTodos({ filterBy, onFilter, todolist }) {
   const checkedTodos = todolist.reduce(
-    (acc, todo) => (todo.isChecked ? (acc += 1) : null),
+    (acc, todo) => (todo.isChecked ? (acc += 1) : 0),
     0
   );
-  const uncheckedTodos = todolist.length - checkedTodos;
 
   const filterItems = [
     { text: 'all', length: todolist.length },
-    { text: 'todo', length: uncheckedTodos },
+    { text: 'todo', length: todolist.length - checkedTodos },
     { text: 'done', length: checkedTodos },
   ];
 
