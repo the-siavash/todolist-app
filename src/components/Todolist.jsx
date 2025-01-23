@@ -102,8 +102,8 @@ function Todolist() {
       </div>
 
       <div className="todolist__body">
-        {todolist.length === 0 && (
-          <p className="todolist__item--empty">There is nothing todo...</p>
+        {sortedTodolist.length === 0 && (
+          <p className="todolist__item--empty">There is nothing here...</p>
         )}
         {sortedTodolist.map((todo) => (
           <TodoItem
