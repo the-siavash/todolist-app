@@ -5,8 +5,27 @@ import SortTodos from './SortTodos';
 import FilterTodos from './FilterTodos';
 import useLocalStorage from '../hooks/useLocalStorage';
 
+function todolistReducer(todolist, { type, payload }) {
+  switch (type) {
+    case 'add':
+      return [...todolist, payload];
+    case 'remove':
+      return todolist.filter((todo) => todo.id !== payload);
+    case 'checkToggle':
+      return todolist.map((todo) =>
+        todo.id === payload ? { ...todo, isChecked: !todo.isChecked } : todo
+      );
+    case 'edit':
+      return todolist.map((todo) =>
+        todo.id === payload.id ? { ...todo, ...payload } : todo
+      );
+    default:
+      throw new Error(`Unknown Type Error: ${type}`);
+  }
+}
+
 function Todolist() {
-  const [todolist, setTodolist] = useLocalStorage('todolist', []);
+  const [todolist, dispatch] = useLocalStorage('todolist', todolistReducer, []);
   const [sortedBy, setSortedBy] = useState('newest');
   const [filter, setFilter] = useState('all');
   const dialogRef = useRef();
@@ -46,30 +65,20 @@ function Todolist() {
       break;
   }
 
-  const handleTodolist = (todo) => {
-    setTodolist([...todolist, todo]);
+  const handleTodoAdd = (todo) => {
+    dispatch({ type: 'add', payload: todo });
   };
 
   const handleTodoCheckToggle = (todoId) => {
-    setTodolist((prevTodolist) =>
-      prevTodolist.map((todo) =>
-        todo.id === todoId ? { ...todo, isChecked: !todo.isChecked } : todo
-      )
-    );
+    dispatch({ type: 'checkToggle', payload: todoId });
   };
 
   const handleTodoRemove = (todoId) => {
-    setTodolist((prevTodolist) =>
-      prevTodolist.filter((todo) => todo.id !== todoId)
-    );
+    dispatch({ type: 'remove', payload: todoId });
   };
 
   const handleTodoEdit = (editedTodo) => {
-    setTodolist((prevTodolist) =>
-      prevTodolist.map((todo) =>
-        todo.id === editedTodo.id ? { ...todo, ...editedTodo } : todo
-      )
-    );
+    dispatch({ type: 'edit', payload: editedTodo });
   };
 
   return (
@@ -86,7 +95,7 @@ function Todolist() {
         >
           New Todo
         </button>
-        <TodoAddItem dialogRef={dialogRef} onTodoSubmit={handleTodolist} />
+        <TodoAddItem dialogRef={dialogRef} onTodoSubmit={handleTodoAdd} />
       </div>
 
       <div className="todolist__filter-section">
