@@ -1,9 +1,12 @@
 import Todolist from './components/Todolist';
+import { TodolistProvider } from './context/TodolistContext';
 
 export default function App() {
   return (
     <div className="container">
-      <Todolist />
+      <TodolistProvider>
+        <Todolist />
+      </TodolistProvider>
     </div>
   );
 }

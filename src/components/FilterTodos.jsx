@@ -1,4 +1,8 @@
-function FilterTodos({ filterBy, onFilter, todolist }) {
+import { useTodolist } from "../context/TodolistContext";
+
+function FilterTodos({ filterBy, onFilter }) {
+  const todolist = useTodolist();
+  
   const checkedTodos = todolist.reduce(
     (acc, todo) => (todo.isChecked ? (acc += 1) : 0),
     0

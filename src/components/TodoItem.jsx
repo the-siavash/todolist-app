@@ -2,8 +2,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { useRef } from 'react';
 import TodoEditItem from './TodoEditItem';
+import { useTodolistDispatch } from '../context/TodolistContext';
 
-function TodoItem({ todoData, onCheckToggle, onRemove, onEdit }) {
+function TodoItem({ todoData }) {
+  const dispatch = useTodolistDispatch();
   const dialogRef = useRef();
 
   const formattedDate = new Date(todoData.editedAt).toLocaleDateString(
@@ -23,7 +25,7 @@ function TodoItem({ todoData, onCheckToggle, onRemove, onEdit }) {
         icon={todoData.isChecked ? faCircleCheck : faCircle}
         size="lg"
         className="todolist__icon-check"
-        onClick={() => onCheckToggle(todoData.id)}
+        onClick={() => dispatch({ type: 'checkToggle', payload: todoData.id })}
       />
       <div className="todolist__item-content">
         <h2 className="todolist__item-title">{todoData.title}</h2>
@@ -38,17 +40,13 @@ function TodoItem({ todoData, onCheckToggle, onRemove, onEdit }) {
           </span>
           <span
             className="todolist__icon-remove"
-            onClick={() => onRemove(todoData.id)}
+            onClick={() => dispatch({ type: 'remove', payload: todoData.id })}
           >
             remove
           </span>
         </p>
       </div>
-      <TodoEditItem
-        dialogRef={dialogRef}
-        todoData={todoData}
-        onTodoEdit={onEdit}
-      />
+      <TodoEditItem dialogRef={dialogRef} todoData={todoData} />
     </div>
   );
 }

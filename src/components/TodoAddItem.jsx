@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useTodolistDispatch } from '../context/TodolistContext';
 
-function TodoAddItem({ onTodoSubmit, dialogRef }) {
+function TodoAddItem({ dialogRef }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const dispatch = useTodolistDispatch();
 
   const createTodo = () => {
     if (!title || !description) return null;
@@ -14,7 +16,7 @@ function TodoAddItem({ onTodoSubmit, dialogRef }) {
       createdAt: new Date().toISOString(),
       editedAt: new Date().toISOString(),
     };
-    onTodoSubmit(todo);
+    dispatch({ type: 'add', payload: todo });
     setTitle('');
     setDescription('');
   };

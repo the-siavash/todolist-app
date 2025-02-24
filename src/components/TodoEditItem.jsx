@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useTodolistDispatch } from '../context/TodolistContext';
 
-function TodoEditItem({ dialogRef, onTodoEdit, todoData }) {
+function TodoEditItem({ dialogRef, todoData }) {
   const [title, setTitle] = useState(todoData.title);
   const [description, setDescription] = useState(todoData.description);
+  const dispatch = useTodolistDispatch();
 
   const editTodo = () => {
     if (!title || !description) return null;
@@ -12,7 +14,7 @@ function TodoEditItem({ dialogRef, onTodoEdit, todoData }) {
       description: description,
       editedAt: new Date().toISOString(),
     };
-    onTodoEdit(editedTodo);
+    dispatch({ type: 'edit', payload: editedTodo });
   };
 
   const handleSubmitClick = () => {
